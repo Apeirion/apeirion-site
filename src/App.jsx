@@ -27,7 +27,8 @@ function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
-        Test CI/CD
+
+        Testing 1 2 3
       </p>
     </>
   )
