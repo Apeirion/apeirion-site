@@ -29,6 +29,7 @@ function App() {
         Click on the Vite and React logos to learn more
 
         Testing 1 2 3
+        Last CICD test
       </p>
     </>
   )
