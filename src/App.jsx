@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Github, Linkedin, Mail } from 'lucide-react'
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -35,13 +36,30 @@ function App() {
         `}
       >
         <button
-          className="mb-4 w-10 h-10 flex items-center justify-center rounded-full text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
+          className="w-10 h-10 flex items-center justify-center rounded-full text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
           onClick={() => setSidebarOpen(false)}
           aria-label="Close sidebar"
         >
           <span className="material-symbols-outlined text-xl">menu</span>
         </button>
-        <nav className="space-y-2">
+
+        {/* Social Links */}
+        <div className="space-y-2 p-2">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
+            <Github className="w-5 h-5" />
+            <span>GitHub</span>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
+            <Linkedin className="w-5 h-5" />
+            <span>LinkedIn</span>
+          </a>
+          <a href="mailto:you@example.com" className="flex items-center gap-2 hover:underline">
+            <Mail className="w-5 h-5" />
+            <span>Email</span>
+          </a>
+        </div>
+
+        <nav className="space-y-2 p-2">
           <a href="#about" className="block hover:underline">About</a>
           <a href="#resume" className="block hover:underline">Resume</a>
           <a href="#projects" className="block hover:underline">Projects</a>
