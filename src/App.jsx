@@ -5,19 +5,41 @@ function App() {
 
   return (
     <div className="min-h-screen font-sans text-[#ececec] bg-[#212121]">
+      {/* Google Fonts Material Symbols */}
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu"
+      />
+      <style>{`
+        .material-symbols-outlined {
+          font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+        }
+        .sidebar {
+          clip-path: inset(0 0 0 0);
+          transition: clip-path 0.5s ease-in-out;
+        }
+        .sidebar.closed {
+          clip-path: inset(0 100% 0 0);
+        }
+      `}</style>
+
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 h-full w-[260px] bg-[#171717] text-sm p-4 flex flex-col
-          transform transition-transform duration-500 ease-in-out
-          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+          sidebar fixed top-0 left-0 h-full w-[260px] bg-[#171717] text-sm p-4 flex flex-col
+          ${sidebarOpen ? '' : 'closed'}
         `}
       >
         <button
-          className="mb-4 px-3 py-1 bg-gray-800 text-white rounded hover:bg-gray-700"
+          className="mb-4 w-10 h-10 flex items-center justify-center rounded-full text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
           onClick={() => setSidebarOpen(false)}
+          aria-label="Close sidebar"
         >
-          Close
+          <span className="material-symbols-outlined text-xl">menu</span>
         </button>
         <nav className="space-y-2">
           <a href="#about" className="block hover:underline">About</a>
@@ -35,24 +57,10 @@ function App() {
         {!sidebarOpen && (
           <button
             aria-label="Open sidebar"
-            className="absolute top-4 left-4 h-10 rounded-lg px-2 text-[#a9a9a9] hover:bg-[#2a2a2a] focus-visible:outline-none z-10"
+            className="absolute top-4 left-4 w-10 h-10 flex items-center justify-center rounded-full text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors focus-visible:outline-none z-10"
             onClick={() => setSidebarOpen(true)}
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="icon-xl-heavy"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M4 6H20V8H4V6ZM4 11H20V13H4V11ZM4 16H20V18H4V16Z"
-                fill="currentColor"
-              />
-            </svg>
+            <span className="material-symbols-outlined text-xl">menu</span>
           </button>
         )}
 
