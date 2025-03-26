@@ -38,4 +38,4 @@ jobs:
             docker build -t apeirion/site .
             docker stop apeirion-site || true
             docker rm apeirion-site || true
-            docker run -d --name apeirion-site -p 80:80 apeirion/site
+            docker run -d --name apeirion-site -p 3000:80 apeirion/site
