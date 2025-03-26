@@ -1,24 +1,12 @@
 import React, { useState } from 'react'
-import { Github, Linkedin, Mail } from 'lucide-react'
+import { Github, Linkedin, Mail, ChevronRightSquare, ChevronLeftSquare } from 'lucide-react'
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
 
   return (
     <div className="min-h-screen font-sans text-[#ececec] bg-[#212121]">
-      {/* Google Fonts Material Symbols */}
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=menu"
-      />
       <style>{`
-        .material-symbols-outlined {
-          font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 24;
-        }
         .sidebar {
           clip-path: inset(0 0 0 0);
           transition: clip-path 0.5s ease-in-out;
@@ -31,39 +19,46 @@ function App() {
       {/* Sidebar */}
       <aside
         className={`
-          sidebar fixed top-0 left-0 h-full w-[260px] bg-[#171717] text-sm p-4 flex flex-col
+          sidebar fixed top-0 left-0 h-full w-[260px] bg-[#171717] text-sm p-3 flex flex-col
           ${sidebarOpen ? '' : 'closed'}
         `}
       >
         <button
-          className="w-10 h-10 flex items-center justify-center rounded-full text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
+          className="mb-2 w-10 h-10 flex items-center justify-center rounded-full text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
           onClick={() => setSidebarOpen(false)}
           aria-label="Close sidebar"
         >
-          <span className="material-symbols-outlined text-xl">menu</span>
+          <ChevronRightSquare strokeWidth={2} className="w-6 h-6" />
         </button>
 
         {/* Social Links */}
-        <div className="space-y-2 p-2">
+        <div className="space-y-3 p-2 mb-4">
           <a href="https://github.com/Apeirion" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
-            <Github strokeWidth={1.5} className="w-5 h-5" />
+            <span className="w-6 h-6 flex items-center justify-center rounded-full bg-[#2f2f2f]">
+              <Github strokeWidth={1.5} className="w-4 h-4 text-[#b4b4b4]" />
+            </span>
             <span>GitHub</span>
           </a>
           <a href="https://www.linkedin.com/in/andrew-j-kim-me/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
-            <Linkedin strokeWidth={1.5} className="w-5 h-5" />
+            <span className="w-6 h-6 flex items-center justify-center rounded-full bg-[#2f2f2f]">
+              <Linkedin strokeWidth={1.5} className="w-4 h-4 text-[#b4b4b4]" />
+            </span>
             <span>LinkedIn</span>
           </a>
           <a href="mailto:personal@apeirion.com" className="flex items-center gap-2 hover:underline">
-            <Mail strokeWidth={1.5} className="w-5 h-5" />
+            <span className="w-6 h-6 flex items-center justify-center rounded-full bg-[#2f2f2f]">
+              <Mail strokeWidth={1.5} className="w-4 h-4 text-[#b4b4b4]" />
+            </span>
             <span>Email</span>
           </a>
         </div>
 
-        <nav className="space-y-2 p-2">
-          <a href="#about" className="block hover:underline">About</a>
-          <a href="#resume" className="block hover:underline">Resume</a>
-          <a href="#projects" className="block hover:underline">Projects</a>
-          <a href="#contact" className="block hover:underline">Contact</a>
+        <nav className="space-y-0 p-2">
+          <span class="text-xs font-semibold text-ellipsis overflow-hidden break-all pt-1 mb-2 text-token-text-primary block">Apeirion</span>
+          <a href="#about" className="pt-2 pb-2 block hover:underline">About</a>
+          <a href="#resume" className="pt-2 pb-2 block hover:underline">Resume</a>
+          <a href="#projects" className="pt-2 pb-2 block hover:underline">Projects</a>
+          <a href="#contact" className="pt-2 pb-2 block hover:underline">Contact</a>
         </nav>
       </aside>
 
@@ -73,12 +68,13 @@ function App() {
         style={{ marginLeft: sidebarOpen ? '260px' : '0' }}
       >
         {!sidebarOpen && (
+
           <button
-            aria-label="Open sidebar"
-            className="absolute top-4 left-4 w-10 h-10 flex items-center justify-center rounded-full text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors focus-visible:outline-none z-10"
-            onClick={() => setSidebarOpen(true)}
+          className="mb-2 w-10 h-10 flex items-center justify-center rounded-full text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
+          onClick={() => setSidebarOpen(true)}
+          aria-label="Open sidebar"
           >
-            <span className="material-symbols-outlined text-xl">menu</span>
+          <ChevronLeftSquare strokeWidth={2} className="w-6 h-6" />
           </button>
         )}
 
