@@ -45,16 +45,16 @@ function App() {
 
         {/* Social Links */}
         <div className="space-y-2 p-2">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
-            <Github className="w-5 h-5" />
+          <a href="https://github.com/Apeirion" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
+            <Github strokeWidth={1.5} className="w-5 h-5" />
             <span>GitHub</span>
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
-            <Linkedin className="w-5 h-5" />
+          <a href="https://www.linkedin.com/in/andrew-j-kim-me/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
+            <Linkedin strokeWidth={1.5} className="w-5 h-5" />
             <span>LinkedIn</span>
           </a>
-          <a href="mailto:you@example.com" className="flex items-center gap-2 hover:underline">
-            <Mail className="w-5 h-5" />
+          <a href="mailto:personal@apeirion.com" className="flex items-center gap-2 hover:underline">
+            <Mail strokeWidth={1.5} className="w-5 h-5" />
             <span>Email</span>
           </a>
         </div>
