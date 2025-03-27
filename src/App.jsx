@@ -18,6 +18,9 @@ function App() {
         .toggle-btn-hidden {
           visibility: hidden;
         }
+        .main-content-transition {
+          transition: margin-left 0.5s ease-in-out;
+        }
       `}</style>
 
       {/* Sidebar */}
@@ -123,7 +126,7 @@ function App() {
 
       {/* Main Content */}
       <main
-        className="flex-1 p-3 pt-2 transition-all duration-500 ease-in-out relative"
+        className={`main-content-transition flex-1 p-3 pt-2 relative`}
         style={{ marginLeft: sidebarOpen ? '260px' : '0' }}
       >
         <button
