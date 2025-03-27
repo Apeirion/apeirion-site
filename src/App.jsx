@@ -15,6 +15,9 @@ function App() {
         .sidebar.closed {
           clip-path: inset(0 100% 0 0);
         }
+        .toggle-btn-hidden {
+          visibility: hidden;
+        }
       `}</style>
 
       {/* Sidebar */}
@@ -120,42 +123,38 @@ function App() {
 
       {/* Main Content */}
       <main
-        className="flex-1 p-6 transition-all duration-500 ease-in-out relative"
+        className="flex-1 p-3 pt-2 transition-all duration-500 ease-in-out relative"
         style={{ marginLeft: sidebarOpen ? '260px' : '0' }}
       >
-        {!sidebarOpen && (
-          <button
-            className="mb-2 w-10 h-10 flex items-center justify-center rounded-full text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
-            onClick={() => setSidebarOpen(true)}
-            aria-label="Open sidebar"
-          >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-window-sidebar" viewBox="0 0 16 16">
-            <path d="M2.5 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m1 .5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
-            <path d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v2H1V3a1 1 0 0 1 1-1zM1 13V6h4v8H2a1 1 0 0 1-1-1m5 1V6h9v7a1 1 0 0 1-1 1z"/>
-          </svg>
-          
-          </button>
-        )}
+        <button
+          className={`mb-1.5 w-10 h-10 flex items-center justify-center rounded-lg text-[#b4b4b4] hover:bg-[#424242] transition-colors ${sidebarOpen ? 'toggle-btn-hidden' : ''}`}
+          onClick={() => setSidebarOpen(true)}
+          aria-label="Open sidebar">
+          <Sidebar size={24} weight="fill" />
+        </button>
 
-        <section id="about" className="mb-16">
-          <h1 className="text-2xl font-bold mb-4">About</h1>
-          <p>This is the about section.</p>
-        </section>
+        <div>
+          <section id="about" className="mb-16">
+            <h1 className="text-2xl font-bold mb-4">About</h1>
+            <p>This is the about section.</p>
+          </section>
 
-        <section id="resume" className="mb-16">
-          <h1 className="text-2xl font-bold mb-4">Resume</h1>
-          <p>This is the resume section.</p>
-        </section>
+          <section id="resume" className="mb-16">
+            <h1 className="text-2xl font-bold mb-4">Resume</h1>
+            <p>This is the resume section.</p>
+          </section>
 
-        <section id="projects" className="mb-16">
-          <h1 className="text-2xl font-bold mb-4">Projects</h1>
-          <p>This is the projects section.</p>
-        </section>
+          <section id="projects" className="mb-16">
+            <h1 className="text-2xl font-bold mb-4">Projects</h1>
+            <p>This is the projects section.</p>
+          </section>
 
-        <section id="contact">
-          <h1 className="text-2xl font-bold mb-4">Contact</h1>
-          <p>This is the contact section.</p>
-        </section>
+          <section id="contact">
+            <h1 className="text-2xl font-bold mb-4">Contact</h1>
+            <p>This is the contact section.</p>
+          </section>
+        </div>
+        
       </main>
     </div>
   )
