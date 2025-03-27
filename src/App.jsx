@@ -22,16 +22,12 @@ function App() {
         className={`
           sidebar fixed top-0 left-0 h-full w-[260px] bg-[#171717] text-sm p-3 pt-2 flex flex-col
           ${sidebarOpen ? '' : 'closed'}
-        `}
-      >
+        `}>
         <button
           className="mb-1.5 w-10 h-10 flex items-center justify-center rounded-lg text-[#b4b4b4] hover:bg-[#424242] transition-colors"
           onClick={() => setSidebarOpen(false)}
-          aria-label="Close sidebar"
-        >
+          aria-label="Close sidebar">
           <Sidebar size={24} weight="fill" />
-
-
         </button>
 
         {/* Social Links */}
@@ -80,14 +76,46 @@ function App() {
             </button>
           </a>
         </div>
-
-        <nav className="space-y-0 p-2">
-          <span class="text-xs font-semibold text-ellipsis overflow-hidden break-all pt-1 mb-2 text-token-text-primary block">Apeirion</span>
-          <a href="#about" className="pt-2 pb-2 block hover:underline">About</a>
-          <a href="#resume" className="pt-2 pb-2 block hover:underline">Resume</a>
-          <a href="#projects" className="pt-2 pb-2 block hover:underline">Projects</a>
-          <a href="#contact" className="pt-2 pb-2 block hover:underline">Contact</a>
-        </nav>
+        {/* Website Content */}
+        <div>
+              <span className="mt-7 flex h-[26px] w-full items-center px-2 
+                        text-[#ececec] text-xs font-semibold">
+                          Apeirion
+              </span>
+        </div>
+        <div>
+          <a href="#about">
+            <button
+              className="flex h-9 w-full items-center gap-2.5 rounded-lg px-2 
+                        text-[#ececec] hover:bg-[#212121] 
+                        transition-all duration-150 ease-in-out 
+                        active:scale-[0.98]">
+              <span className="text-sm">About Me</span>
+            </button>
+          </a>
+        </div>
+        <div>
+          <a href="#resume">
+            <button
+              className="flex h-9 w-full items-center gap-2.5 rounded-lg px-2 
+                        text-[#ececec] hover:bg-[#212121] 
+                        transition-all duration-150 ease-in-out 
+                        active:scale-[0.98]">
+              <span className="text-sm">Resume</span>
+            </button>
+          </a>
+        </div>
+        <div>
+          <a href="#portfolio">
+            <button
+              className="flex h-9 w-full items-center gap-2.5 rounded-lg px-2 
+                        text-[#ececec] hover:bg-[#212121] 
+                        transition-all duration-150 ease-in-out 
+                        active:scale-[0.98]">
+              <span className="text-sm">Portfolio</span>
+            </button>
+          </a>
+        </div>
       </aside>
 
       {/* Main Content */}
