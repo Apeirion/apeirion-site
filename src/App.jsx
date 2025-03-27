@@ -135,27 +135,62 @@ function App() {
           aria-label="Open sidebar">
           <Sidebar size={24} weight="fill" />
         </button>
-
+        
+        {/* About */}
         <div>
-          <section id="about" className="mb-16">
-            <h1 className="text-2xl font-bold mb-4">About</h1>
-            <p>This is the about section.</p>
-          </section>
+          <div className="flex justify-center px-6 py-5">
+            <div className="w-full max-w-3xl flex justify-end">
+              <div className=" rounded-3xl bg-[#323232d9] px-5 py-2.5 whitespace-pre-wrap">
+                ABOUT ME
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center px-6 py-5">
+            <div className="w-full max-w-3xl flex justify-start">
+              <div className="max-w-[100%] px-5 py-2.5 whitespace-pre-wrap">
+                <p>This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.</p>
+                <p>This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.This is the about section.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Resume */}
+        <div>
+          <div className="flex justify-center px-6 py-5">
+            <div className="w-full max-w-3xl flex justify-end">
+              <div className=" rounded-3xl bg-[#323232d9] px-5 py-2.5 whitespace-pre-wrap">
+                RESUME
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center px-6 py-5">
+            <div className="w-full max-w-3xl flex justify-start">
+              <div className="max-w-[100%] px-5 py-2.5 whitespace-pre-wrap">
+                <p>This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.</p>
+                <p>This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.This is the resume section.</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <section id="resume" className="mb-16">
-            <h1 className="text-2xl font-bold mb-4">Resume</h1>
-            <p>This is the resume section.</p>
-          </section>
-
-          <section id="projects" className="mb-16">
-            <h1 className="text-2xl font-bold mb-4">Projects</h1>
-            <p>This is the projects section.</p>
-          </section>
-
-          <section id="contact">
-            <h1 className="text-2xl font-bold mb-4">Contact</h1>
-            <p>This is the contact section.</p>
-          </section>
+        {/* Portfolio */}
+        <div>
+          <div className="flex justify-center px-6 py-5">
+            <div className="w-full max-w-3xl flex justify-end">
+              <div className=" rounded-3xl bg-[#323232d9] px-5 py-2.5 whitespace-pre-wrap">
+                PORTFOLIO
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-center px-6 py-5">
+            <div className="w-full max-w-3xl flex justify-start">
+              <div className="max-w-[100%] px-5 py-2.5 whitespace-pre-wrap">
+                <p>This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.</p>
+                <p>This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.This is the portfolio section.</p>
+              </div>
+            </div>
+          </div>
         </div>
         
       </main>
