@@ -16,7 +16,7 @@ function App() {
           clip-path: inset(0 100% 0 0);
         }
         .toggle-btn-hidden {
-          visibility: hidden;
+          display: none;
         }
         .main-content-transition {
           transition: margin-left 0.5s ease-in-out;
@@ -131,20 +131,20 @@ function App() {
       >
         <div className="flex gap-2">
           
-        <button
+          <button
             className={`mb-1.5 w-10 h-10 flex items-center justify-center rounded-lg text-[#b4b4b4] hover:bg-[#424242] transition-colors ${sidebarOpen ? 'toggle-btn-hidden' : ''}`}
             onClick={() => setSidebarOpen(true)}
             aria-label="Open sidebar">
             <Sidebar size={24} weight="fill" />
           </button>
           <span
-            className={`text-lg font-semibold px-3 mb-1.5 flex items-center text-[#b4b4b4]`}
-            >Apeirion
+            className={`mb-1.5 w-10 h-10 flex items-center text-lg font-semibold px-3 text-[#b4b4b4]`}>
+            Apeirion
           </span>
         </div>
         
         {/* About */}
-        <div>
+        <div id = "about">
           <div className="flex justify-center px-6 py-5">
             <div className="w-full max-w-3xl flex justify-end">
               <div className=" rounded-3xl bg-[#323232d9] px-5 py-2.5 whitespace-pre-wrap">
@@ -163,7 +163,7 @@ function App() {
         </div>
         
         {/* Resume */}
-        <div>
+        <div id = "resume">
           <div className="flex justify-center px-6 py-5">
             <div className="w-full max-w-3xl flex justify-end">
               <div className=" rounded-3xl bg-[#323232d9] px-5 py-2.5 whitespace-pre-wrap">
@@ -182,7 +182,7 @@ function App() {
         </div>
 
         {/* Portfolio */}
-        <div>
+        <div id = "portfolio">
           <div className="flex justify-center px-6 py-5">
             <div className="w-full max-w-3xl flex justify-end">
               <div className=" rounded-3xl bg-[#323232d9] px-5 py-2.5 whitespace-pre-wrap">
