@@ -129,12 +129,19 @@ function App() {
         className={`main-content-transition flex-1 p-3 pt-2 relative`}
         style={{ marginLeft: sidebarOpen ? '260px' : '0' }}
       >
+        <div className="flex gap-2">
+          
         <button
-          className={`mb-1.5 w-10 h-10 flex items-center justify-center rounded-lg text-[#b4b4b4] hover:bg-[#424242] transition-colors ${sidebarOpen ? 'toggle-btn-hidden' : ''}`}
-          onClick={() => setSidebarOpen(true)}
-          aria-label="Open sidebar">
-          <Sidebar size={24} weight="fill" />
-        </button>
+            className={`mb-1.5 w-10 h-10 flex items-center justify-center rounded-lg text-[#b4b4b4] hover:bg-[#424242] transition-colors ${sidebarOpen ? 'toggle-btn-hidden' : ''}`}
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Open sidebar">
+            <Sidebar size={24} weight="fill" />
+          </button>
+          <span
+            className={`text-lg font-semibold px-3 mb-1.5 flex items-center text-[#b4b4b4]`}
+            >Apeirion
+          </span>
+        </div>
         
         {/* About */}
         <div>
