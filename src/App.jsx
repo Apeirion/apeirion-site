@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Github, Linkedin, Mail, ChevronRightSquare, ChevronLeftSquare } from 'lucide-react'
+import { Github, Linkedin, Mail } from 'lucide-react'
+import { Sidebar } from "phosphor-react"
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -19,16 +20,18 @@ function App() {
       {/* Sidebar */}
       <aside
         className={`
-          sidebar fixed top-0 left-0 h-full w-[260px] bg-[#171717] text-sm p-3 flex flex-col
+          sidebar fixed top-0 left-0 h-full w-[260px] bg-[#171717] text-sm p-3 pt-2 flex flex-col
           ${sidebarOpen ? '' : 'closed'}
         `}
       >
         <button
-          className="mb-2 w-10 h-10 flex items-center justify-center rounded-full text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
+          className="mb-2 w-10 h-10 flex items-center justify-center rounded-lg text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
           onClick={() => setSidebarOpen(false)}
           aria-label="Close sidebar"
         >
-          <ChevronRightSquare strokeWidth={2} className="w-6 h-6" />
+          <Sidebar size={24} weight="fill" />
+
+
         </button>
 
         {/* Social Links */}
@@ -68,13 +71,16 @@ function App() {
         style={{ marginLeft: sidebarOpen ? '260px' : '0' }}
       >
         {!sidebarOpen && (
-
           <button
-          className="mb-2 w-10 h-10 flex items-center justify-center rounded-full text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
-          onClick={() => setSidebarOpen(true)}
-          aria-label="Open sidebar"
+            className="mb-2 w-10 h-10 flex items-center justify-center rounded-full text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Open sidebar"
           >
-          <ChevronLeftSquare strokeWidth={2} className="w-6 h-6" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-window-sidebar" viewBox="0 0 16 16">
+            <path d="M2.5 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m1 .5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+            <path d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v2H1V3a1 1 0 0 1 1-1zM1 13V6h4v8H2a1 1 0 0 1-1-1m5 1V6h9v7a1 1 0 0 1-1 1z"/>
+          </svg>
+          
           </button>
         )}
 
