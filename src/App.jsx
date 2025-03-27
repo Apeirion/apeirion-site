@@ -25,7 +25,7 @@ function App() {
         `}
       >
         <button
-          className="mb-2 w-10 h-10 flex items-center justify-center rounded-lg text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
+          className="mb-1.5 w-10 h-10 flex items-center justify-center rounded-lg text-[#b4b4b4] hover:bg-[#2f2f2f] transition-colors"
           onClick={() => setSidebarOpen(false)}
           aria-label="Close sidebar"
         >
@@ -35,24 +35,34 @@ function App() {
         </button>
 
         {/* Social Links */}
-        <div className="space-y-3 p-2 mb-4">
-          <a href="https://github.com/Apeirion" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
-            <span className="w-6 h-6 flex items-center justify-center rounded-full bg-[#2f2f2f]">
-              <Github strokeWidth={1.5} className="w-4 h-4 text-[#b4b4b4]" />
-            </span>
-            <span>GitHub</span>
+        <div>
+          <a href="https://github.com/Apeirion">
+            <button class="flex h-9 w-full items-center gap-2.5 rounded-lg px-2 hover:bg-[#2f2f2f]">
+              <div class="flex h-6 w-6 items-center justify-center text-token-text-secondary">
+                <Github strokeWidth={1.5} className="w-4 h-4 text-[#ececec]" />
+              </div>
+              <span class="text-sm">Github</span>
+            </button>
           </a>
-          <a href="https://www.linkedin.com/in/andrew-j-kim-me/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline">
-            <span className="w-6 h-6 flex items-center justify-center rounded-full bg-[#2f2f2f]">
-              <Linkedin strokeWidth={1.5} className="w-4 h-4 text-[#b4b4b4]" />
-            </span>
-            <span>LinkedIn</span>
+        </div>
+        <div>
+          <a href="https://www.linkedin.com/in/andrew-j-kim-me/">
+            <button class="flex h-9 w-full items-center gap-2.5 rounded-lg px-2 hover:bg-[#2f2f2f]">
+              <div class="flex h-6 w-6 items-center justify-center text-token-text-secondary">
+                <Linkedin strokeWidth={1.5} className="w-4 h-4 text-[#ececec]" />
+              </div>
+              <span class="text-sm">Linkedin</span>
+            </button>
           </a>
-          <a href="mailto:personal@apeirion.com" className="flex items-center gap-2 hover:underline">
-            <span className="w-6 h-6 flex items-center justify-center rounded-full bg-[#2f2f2f]">
-              <Mail strokeWidth={1.5} className="w-4 h-4 text-[#b4b4b4]" />
-            </span>
-            <span>Email</span>
+        </div>
+        <div>
+          <a href="mailto:personal@apeirion.com">
+            <button class="flex h-9 w-full items-center gap-2.5 rounded-lg px-2 hover:bg-[#2f2f2f]">
+              <div class="flex h-6 w-6 items-center justify-center text-token-text-secondary">
+                <Mail strokeWidth={1.5} className="w-4 h-4 text-[#ececec]" />
+              </div>
+              <span class="text-sm">Email</span>
+            </button>
           </a>
         </div>
 
