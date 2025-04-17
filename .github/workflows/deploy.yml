@@ -29,16 +29,27 @@ jobs:
           echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
 
-      - name: Copy Files to VPS
+      - name: Archive necessary files
         run: |
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 -r . ${{ secrets.VPS_USER }}@${{ secrets.VPS_TAILSCALE_IP }}:/home/${{ secrets.VPS_USER }}/apeirion-site
+          tar -czf site.tar.gz \
+            ./build \
+            ./Dockerfile \
+            ./package.json \
+            ./public
 
-      - name: SSH into VPS and Restart Docker Container
+      - name: Copy archive to VPS
+        run: |
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 site.tar.gz ${{ secrets.VPS_USER }}@${{ secrets.VPS_TAILSCALE_IP }}:/home/${{ secrets.VPS_USER }}/
+
+      - name: SSH into VPS and Deploy
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 ${{ secrets.VPS_USER }}@${{ secrets.VPS_TAILSCALE_IP }} << 'EOF'
+            rm -rf ~/apeirion-site
+            mkdir ~/apeirion-site
+            tar -xzf ~/site.tar.gz -C ~/apeirion-site
             cd ~/apeirion-site
             docker build -t apeirion/site .
             docker stop apeirion-site || true
             docker rm apeirion-site || true
             docker run -d --name apeirion-site -p 3000:80 apeirion/site
-          EOF
+EOF
