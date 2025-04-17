@@ -32,7 +32,7 @@ jobs:
       - name: Archive necessary files
         run: |
           tar -czf site.tar.gz \
-            ./build \
+            ./dist \
             ./Dockerfile \
             ./package.json \
             ./public
