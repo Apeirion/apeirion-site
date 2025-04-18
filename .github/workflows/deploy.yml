@@ -1,55 +1,51 @@
-name: Deploy to VPS on Push to Main
+name: Deploy to Home Lab
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install Tailscale
-        run: |
-          curl -fsSL https://tailscale.com/install.sh | sh
-          sudo tailscale up --authkey ${{ secrets.TS_AUTHKEY }} --hostname=ci-runner --ssh
-
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build Project
+      - name: Install dependencies & build
         run: |
-          npm install
+          npm ci
           npm run build
 
-      - name: Setup SSH Key
+      - name: Archive deployable files
+        run: |
+          tar -czf site.tar.gz dist/ Dockerfile nginx.conf
+
+      - name: Install Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+
+      - name: Upload site to VPS
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          rsync -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" \
+                -avz site.tar.gz github@<TAILSCALE_IP>:/home/github/site.tar.gz
 
-      - name: Archive necessary files
-        run: |
-          tar -czf site.tar.gz \
-            ./dist \
-            ./Dockerfile \
-            ./package.json \
-            ./public
-
-      - name: Copy archive to VPS
-        run: |
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 site.tar.gz ${{ secrets.VPS_USER }}@${{ secrets.VPS_TAILSCALE_IP }}:/home/${{ secrets.VPS_USER }}/
-
-      - name: SSH into VPS and Deploy
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 ${{ secrets.VPS_USER }}@${{ secrets.VPS_TAILSCALE_IP }} << 'EOF'
-            rm -rf ~/apeirion-site
-            mkdir ~/apeirion-site
-            tar -xzf ~/site.tar.gz -C ~/apeirion-site
-            cd ~/apeirion-site
-            docker build -t apeirion/site .
-            docker stop apeirion-site || true
-            docker rm apeirion-site || true
-            docker run -d --name apeirion-site -p 3000:80 apeirion/site
-
+      - name: SSH into VPS to deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: <TAILSCALE_IP>
+          username: github
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            mkdir -p ~/site
+            mv ~/site.tar.gz ~/site/
+            cd ~/site
+            tar -xzf site.tar.gz
+            docker stop apeirion || true
+            docker rm apeirion || true
+            docker build -t apeirion-site .
+            docker run -d --name apeirion -p 80:80 apeirion-site
