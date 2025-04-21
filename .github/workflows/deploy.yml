@@ -2,50 +2,48 @@ name: Deploy to Home Lab
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout Code
+      uses: actions/checkout@v3
 
-      - name: Install dependencies & build
-        run: |
-          npm ci
-          npm run build
+    - name: Build React App
+      run: |
+        npm ci
+        npm run build
 
-      - name: Archive deployable files
-        run: |
-          tar -czf site.tar.gz dist/ Dockerfile nginx.conf
+    - name: Archive Build Files
+      run: tar -czf site.tar.gz dist nginx.conf Dockerfile
 
-      - name: Install Tailscale
-        uses: tailscale/github-action@v2
-        with:
-          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+    - name: Install Tailscale
+      run: |
+        curl -fsSL https://tailscale.com/install.sh | sh
+        sudo tailscale up --authkey ${{ secrets.TS_AUTHKEY }} --ssh
 
-      - name: Upload site to VPS
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          rsync -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" \
-                -avz site.tar.gz github@${{ secrets.VPS_TAILSCALE_IP }}:/home/github/site.tar.gz
+    - name: Add SSH Key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.TS_SSH_PRIVATE }}" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
 
-      - name: SSH into VPS to deploy
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.VPS_TAILSCALE_IP }}
-          username: github
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
-            mkdir -p ~/site
-            mv ~/site.tar.gz ~/site/
-            cd ~/site
-            tar -xzf site.tar.gz
-            docker stop apeirion || true
-            docker rm apeirion || true
-            docker build -t apeirion-site .
-            docker run -d --name apeirion -p 80:80 apeirion-site
+    - name: Transfer Files to VM
+      run: |
+        rsync -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519" \
+        -avz site.tar.gz ${{ secrets.TS_USER }}@${{ secrets.TS_HOST }}:/home/${{ secrets.TS_USER }}/site.tar.gz
+
+    - name: Remote Build and Run Docker
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 ${{ secrets.TS_USER }}@${{ secrets.TS_HOST }} << 'EOF'
+          cd ~
+          tar -xzf site.tar.gz
+          docker stop apeirion || true
+          docker rm apeirion || true
+          docker build -t apeirion .
+          docker run -d --name apeirion -p 80:80 apeirion
+        EOF
