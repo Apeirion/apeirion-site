@@ -37,11 +37,11 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           rsync -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" \
-            -avz site.tar.gz andrew@$TAILSCALE_IP:/home/andrew/
+            -avz site.tar.gz andrew@${{ secrets.TAILSCALE_IP }}:/home/andrew/
 
       - name: Deploy via SSH
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa andrew@$TAILSCALE_IP << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa andrew@${{ secrets.TAILSCALE_IP }} << 'EOF'
             cd /home/andrew
             rm -rf dist nginx.conf Dockerfile
             tar -xzf site.tar.gz
