@@ -51,5 +51,5 @@ jobs:
             docker build -t apeirion-site .
             docker stop apeirion-container || true
             docker rm apeirion-container || true
-            docker run -d --name apeirion-container -p 80:80 apeirion-site
+            docker run -d --name apeirion-container --restart unless-stopped -p 80:80 apeirion-site
           EOF
