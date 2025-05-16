@@ -9,39 +9,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: 📥 Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install dependencies and build (Vite)
+      - name: 📦 Install dependencies and build (Vite)
         run: |
           npm ci
           npm run build
 
-      - name: Compress build
+      - name: 🗜️ Compress build artifacts
         run: |
           tar -czf site.tar.gz dist/ nginx.conf Dockerfile
 
-      - name: Install and connect Tailscale
+      - name: 🛜 Install and connect to Tailscale
         env:
           TAILSCALE_AUTH_KEY: ${{ secrets.TAILSCALE_AUTH_KEY }}
         run: |
           curl -fsSL https://tailscale.com/install.sh | sh
-          sudo tailscale up --authkey $TAILSCALE_AUTH_KEY
-          echo "Tailscale IP: $(tailscale ip -4)"  # for debug
+          sudo tailscale up --authkey "$TAILSCALE_AUTH_KEY" --hostname gha-deploy --timeout 30s
+          echo "Tailscale IP: $(tailscale ip -4)"  # Debug: show IP
 
-      - name: Upload site to VM
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: 🔐 Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          rsync -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" \
-            -avz site.tar.gz andrew@${{ secrets.TAILSCALE_IP }}:/home/andrew/
+          install -m 600 /dev/null ~/.ssh/id_ed25519
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "Host *\n  StrictHostKeyChecking no\n  IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
 
-      - name: Deploy via SSH
+      - name: 📤 Upload site bundle to VM via rsync
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa andrew@${{ secrets.TAILSCALE_IP }} << 'EOF'
+          rsync -avz -e "ssh" site.tar.gz andrew@${{ secrets.TAILSCALE_IP }}:/home/andrew/
+
+      - name: 🐳 Deploy site via SSH and Docker
+        run: |
+          ssh andrew@${{ secrets.TAILSCALE_IP }} << 'EOF'
             cd /home/andrew
             rm -rf dist nginx.conf Dockerfile
             tar -xzf site.tar.gz
