@@ -44,7 +44,7 @@ jobs:
 
       - name: 🐳 Deploy site via SSH and Docker
         run: |
-          ssh andrew@${{ secrets.TAILSCALE_IP }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/id_ed25519 andrew@${{ secrets.TAILSCALE_IP }} << 'EOF'
             cd /home/andrew
             rm -rf dist nginx.conf Dockerfile
             tar -xzf site.tar.gz
