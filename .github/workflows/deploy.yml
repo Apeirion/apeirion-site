@@ -39,7 +39,8 @@ jobs:
 
       - name: 📤 Upload site bundle to VM via rsync
         run: |
-          rsync -avz -e "ssh" site.tar.gz andrew@${{ secrets.TAILSCALE_IP }}:/home/andrew/
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/id_ed25519" \
+            site.tar.gz andrew@${{ secrets.TAILSCALE_IP }}:/home/andrew/
 
       - name: 🐳 Deploy site via SSH and Docker
         run: |
